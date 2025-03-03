@@ -21,23 +21,22 @@
         nav {
             text-align: center;
             display: flex;
-            gap: 30px;
+            flex-direction: column; /* Align the icons vertically */
+            gap: 20px;
         }
 
         a {
             color: #fff;
             text-decoration: none;
-            display: inline-block;
-            margin: 20px;
-            font-size: 40px;
+            display: inline-flex;  /* Use inline-flex for better alignment of icon and text */
+            align-items: center;  /* Vertically center the text with the icon */
+            font-size: 24px;
             padding: 20px;
             border-radius: 50%;
             transition: background-color 0.3s, transform 0.3s;
-            width: 80px;
-            height: 80px;
-            display: flex;
+            width: 200px;
             justify-content: center;
-            align-items: center;
+            gap: 15px;  /* Space between the icon and text */
         }
 
         /* Individual colors */
@@ -47,6 +46,14 @@
 
         .facebook {
             background-color: #3b5998;
+        }
+
+        .game {
+            background-color: #FF5722; /* Unique color for Free Fire */
+        }
+
+        .google {
+            background-color: #4285F4; /* Google color */
         }
 
         /* Hover effects */
@@ -62,15 +69,40 @@
             background-color: #2d4373;
         }
 
+        .game:hover {
+            background-color: #FF7043; /* Darker shade for hover */
+        }
+
+        .google:hover {
+            background-color: #3367D6; /* Darker Google color */
+        }
+
     </style>
 </head>
 <body>
     <nav>
+        <!-- Instagram Link -->
         <a href="https://www.instagram.com" class="instagram" target="_blank">
             <i class="fab fa-instagram"></i>
+            <span>Instagram</span> <!-- Added the name of the social media -->
         </a>
+        
+        <!-- Facebook Link -->
         <a href="https://www.facebook.com" class="facebook" target="_blank">
             <i class="fab fa-facebook-f"></i>
+            <span>Facebook</span> <!-- Added the name of the social media -->
+        </a>
+        
+        <!-- Free Fire Link -->
+        <a href="https://www.freefire.com" class="game" target="_blank">
+            <i class="fas fa-gamepad"></i>
+            <span>Free Fire</span> <!-- Added the name of the game -->
+        </a>
+        
+        <!-- Gmail Link -->
+        <a href="https://www.gmail.com" class="google" target="_blank">
+            <i class="fab fa-google"></i>
+            <span>Gmail</span> <!-- Added the name of the service -->
         </a>
     </nav>
 </body>
